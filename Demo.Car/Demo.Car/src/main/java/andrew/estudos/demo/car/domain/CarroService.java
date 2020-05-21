@@ -41,6 +41,15 @@ public class CarroService {
 	}
 
 
+	public Carro save(Carro carro) {
+		return rep.save(carro);
+		
+	}
+
+
+	
+
+
 
 
 
