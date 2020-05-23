@@ -46,6 +46,14 @@
 			<version>2.3.0</version>
 		</dependency>
 
+		<!-- Lombok: https://projectlombok.org/ -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.12</version>
+			<scope>provided</scope>
+		</dependency>
+
 		<!-- MySQL -->
 		<dependency>
 			<groupId>mysql</groupId>
