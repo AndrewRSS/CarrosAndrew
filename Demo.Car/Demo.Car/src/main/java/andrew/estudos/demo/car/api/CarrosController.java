@@ -28,7 +28,7 @@ public class CarrosController {
 	
 	
 	@GetMapping()
-	public ResponseEntity<List<CarroDTO>> get() {
+	public ResponseEntity get() {
 		return new ResponseEntity<>(service.getCarros(), HttpStatus.OK); 
 	}
 		
@@ -50,7 +50,7 @@ public class CarrosController {
 	}
 	
 	@GetMapping("/tipo/{tipo}")
-	public ResponseEntity<List<CarroDTO>> getCarrosByTipo(@PathVariable("tipo") String tipo) {
+	public ResponseEntity getCarrosByTipo(@PathVariable("tipo") String tipo) {
 	List<CarroDTO> carros = service.getCarrosByTipo(tipo);
 	
 	return carros.isEmpty() ?

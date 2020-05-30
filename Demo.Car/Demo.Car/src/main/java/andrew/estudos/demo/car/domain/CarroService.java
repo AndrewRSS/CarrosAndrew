@@ -1,6 +1,5 @@
 package andrew.estudos.demo.car.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,13 +18,7 @@ public class CarroService {
 
 	public List<CarroDTO> getCarros() {
 
-		List<Carro> carros = rep.findAll(); 
-		
-	
-
-		List<CarroDTO> List =	carros.stream().map(CarroDTO::new).collect(Collectors.toList());
-
-		return List;
+		return rep.findAll().stream().map(CarroDTO::new).collect(Collectors.toList());
 
 	}
 
@@ -37,8 +30,7 @@ public class CarroService {
 
 	public List<CarroDTO> getCarrosByTipo(String tipo) {
 
-		return rep.findAll().stream().map(CarroDTO::new).collect(Collectors.toList());
-
+		return rep.findByTipo(tipo).stream().map(CarroDTO::new).collect(Collectors.toList());
 
 	}
 
