@@ -17,15 +17,20 @@ public class CarroService {
 	private CarroRepository rep;
 
 	public List<CarroDTO> getCarros() {
-
+	
 		return rep.findAll().stream().map(CarroDTO::new).collect(Collectors.toList());
-
+	
 	}
-
-
+	
 	public Optional<Carro> getCarrosById(Long id) {
 
 		return rep.findById(id);
+	}
+
+
+	public Optional<CarroDTO> getCarrosDTOById(Long id) {
+
+		return rep.findById(id).map(CarroDTO::new);
 	}
 
 	public List<CarroDTO> getCarrosByTipo(String tipo) {
@@ -63,7 +68,7 @@ public class CarroService {
 
 
 	public void delete(Long id) {
-		Optional<Carro> carro = getCarrosById(id);
+		Optional<CarroDTO> carro = getCarrosDTOById(id);
 		if(carro.isPresent()) {
 			rep.deleteById(id);
 		}
