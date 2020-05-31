@@ -34,7 +34,7 @@ public class CarrosController {
 		
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Carro> get(@PathVariable("id") Long id) {
+	public ResponseEntity<CarroDTO> get(@PathVariable("id") Long id) {
 		Optional<CarroDTO> carro = service.getCarrosDTOById(id);
 		
 		return carro.isPresent() ?
