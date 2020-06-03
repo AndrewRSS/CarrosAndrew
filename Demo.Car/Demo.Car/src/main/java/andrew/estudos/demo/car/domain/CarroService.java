@@ -22,13 +22,8 @@ public class CarroService {
 	
 	}
 	
-	public Optional<Carro> getCarrosById(Long id) {
 
-		return rep.findById(id);
-	}
-
-
-	public Optional<CarroDTO> getCarrosDTOById(Long id) {
+	public Optional<CarroDTO> getCarrosById(Long id) {
 
 		return rep.findById(id).map(CarroDTO::create);
 	}
@@ -40,16 +35,16 @@ public class CarroService {
 	}
 
 
-	public Carro insert(Carro carro) {
+	public CarroDTO insert(Carro carro) {
 		Assert.isNull(carro.getId());
 
-		return rep.save(carro);
+		return CarroDTO.create(rep.save(carro));
 	}
 
-	public Carro update(Carro carro, Long id) {
+	public CarroDTO update(Carro carro, Long id) {
 		Assert.notNull(id);
 		//Busca o carro no banco de dados
-		Optional<Carro> optional = getCarrosById(id);
+		Optional<Carro> optional = rep.findById(id);
 		if(optional.isPresent()) {
 			Carro db = optional.get();
 			//copiar as propriedades
@@ -60,18 +55,19 @@ public class CarroService {
 			// Atualiza o carro
 			rep.save(db);
 
-			return db;
+			return CarroDTO.create(db);
 		} else {
 			throw new RuntimeException("Não foi possível atualizar o registro");
 		}
 	}
 
 
-	public void delete(Long id) {
-		Optional<CarroDTO> carro = getCarrosDTOById(id);
-		if(carro.isPresent()) {
+	public boolean delete(Long id) {
+		if(getCarrosById(id).isPresent()) {
 			rep.deleteById(id);
+			return true;
 		}
+		return false;
 
 	}
 
