@@ -40,10 +40,10 @@ public class CarroService {
 	}
 
 
-	public Carro insert(Carro carro) {
+	public CarroDTO insert(Carro carro) {
 		Assert.isNull(carro.getId());
 
-		return rep.save(carro);
+		return CarroDTO.create(rep.save(carro));
 	}
 
 	public Carro update(Carro carro, Long id) {
