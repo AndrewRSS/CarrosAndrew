@@ -38,7 +38,7 @@ public class CarrosController {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<CarroDTO> get(@PathVariable("id") Long id) {
-		Optional<CarroDTO> carro = service.getCarrosDTOById(id);
+		Optional<CarroDTO> carro = service.getCarrosById(id);
 		
 		return carro.isPresent() ?
 				ResponseEntity.ok(carro.get()) :
@@ -74,11 +74,14 @@ public class CarrosController {
 	}
 	
 	@PutMapping("/{id}")
-	public String put(@PathVariable("id") Long id, @RequestBody Carro carro) {
+	public ResponseEntity put(@PathVariable("id") Long id, @RequestBody Carro carro) {
+		carro.setId(id);
 		
-		Carro c = service.update(carro, id);
+		CarroDTO c = service.update(carro, id);
 		
-		return "Carro salvo com sucesso.";
+		return c != null ?
+				ResponseEntity.ok(c) :
+				ResponseEntity.notFound().build();
 	}
 	
 	@DeleteMapping()
