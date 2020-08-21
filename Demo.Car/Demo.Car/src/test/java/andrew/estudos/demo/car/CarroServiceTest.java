@@ -17,7 +17,7 @@ import andrew.estudos.demo.car.domain.CarroService;
 import andrew.estudos.demo.car.domain.DTO.CarroDTO;
 
 @SpringBootTest
-class DemoCarApplicationTests {
+class CarroServiceTest {
 	
 	@Autowired
 	private CarroService service;
@@ -50,7 +50,7 @@ class DemoCarApplicationTests {
 	@Test
 	public void teste2() {
 		List<CarroDTO> carros = service.getCarros();
-		assertEquals(30, carros.size());
+		assertEquals(60, carros.size());
 	}
 
 }
