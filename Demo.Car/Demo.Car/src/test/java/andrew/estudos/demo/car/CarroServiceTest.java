@@ -50,7 +50,7 @@ class CarroServiceTest {
 	@Test
 	public void teste2() {
 		List<CarroDTO> carros = service.getCarros();
-		assertEquals(60, carros.size());
+		assertEquals(30, carros.size());
 	}
 
 }
