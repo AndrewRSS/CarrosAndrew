@@ -67,15 +67,15 @@ public class CarroAPITest {
 	public void testLista() {
 		List<CarroDTO> carros = getCarros("/api/v1/carros").getBody();
 		assertNotNull(carros);
-		assertEquals(60, carros.size());
+		assertEquals(30, carros.size());
 	}
 	
 	@Test
 	public void testListaPorTipo() {
 		
-		assertEquals(20, getCarros("/api/v1/carros/tipo/classicos").getBody().size());
-		assertEquals(20, getCarros("/api/v1/carros/tipo/esportivos").getBody().size());
-		assertEquals(20, getCarros("/api/v1/carros/tipo/luxo").getBody().size());
+		assertEquals(10, getCarros("/api/v1/carros/tipo/classicos").getBody().size());
+		assertEquals(10, getCarros("/api/v1/carros/tipo/esportivos").getBody().size());
+		assertEquals(10, getCarros("/api/v1/carros/tipo/luxo").getBody().size());
 	
 		assertEquals(HttpStatus.NO_CONTENT, getCarros("/api/v1/carros/tipo/xxx").getStatusCode());
 	}
