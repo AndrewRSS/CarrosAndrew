@@ -1,12 +1,10 @@
 package andrew.estudos.demo.car;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNull;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,16 +33,16 @@ class CarroServiceTest {
 		Long id = c.getId();
         assertNotNull(id);
         
-        Optional<CarroDTO> op = service.getCarrosById(id);
-        assertTrue(op.isPresent());
+        c = service.getCarrosById(id);
+        assertNotNull(c);
         
-        c = op.get();
+
         assertEquals("Ferrari", c.getNome());
         assertEquals("esportivos", c.getTipo());
         
         service.delete(id);
         
-        assertFalse(service.getCarrosById(id).isPresent());
+        assertNull(service.getCarrosById(id));
 	}
 	
 	@Test

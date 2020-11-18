@@ -3,7 +3,6 @@ package andrew.estudos.demo.car.api;
 
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,12 +36,10 @@ public class CarrosController {
 		
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<CarroDTO> get(@PathVariable("id") Long id) {
-		Optional<CarroDTO> carro = service.getCarrosById(id);
+	public ResponseEntity get(@PathVariable("id") Long id) {
+		CarroDTO carro = service.getCarrosById(id);
 		
-		return carro.isPresent() ?
-				ResponseEntity.ok(carro.get()) :
-			    ResponseEntity.notFound().build();
+		return ResponseEntity.ok(carro);
 	}
 	
 	@GetMapping("/tipo/{tipo}")
@@ -57,16 +54,12 @@ public class CarrosController {
 	@PostMapping
 	public ResponseEntity post(@RequestBody Carro carro) {
 		
-		try {
 			CarroDTO c = service.insert(carro);
 			
 			URI location = getUri(c.getId());
 			return ResponseEntity.created(location).build();
-		} catch (Exception ex) {
-			return ResponseEntity.badRequest().build();
 		}
-
-	}
+	
 	
 	private URI getUri(Long id) {
 		return ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -86,10 +79,8 @@ public class CarrosController {
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity delete(@PathVariable("id") Long id) {
-		boolean ok = service.delete(id);
+		 service.delete(id);
 		
-		return ok?
-			ResponseEntity.ok().build() :
-			ResponseEntity.notFound().build();
+		return ResponseEntity.ok().build();
 	}
 }

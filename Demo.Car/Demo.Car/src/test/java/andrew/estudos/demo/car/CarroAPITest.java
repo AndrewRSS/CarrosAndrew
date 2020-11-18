@@ -2,6 +2,7 @@ package andrew.estudos.demo.car;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import andrew.estudos.demo.car.api.exception.ObjectNotFoundException;
 import andrew.estudos.demo.car.domain.Carro;
 import andrew.estudos.demo.car.domain.DTO.CarroDTO;
 
@@ -60,7 +62,11 @@ public class CarroAPITest {
 		rest.delete(location);
 		
 		//VERIFICA SE DELETOU
-		assertEquals(HttpStatus.NOT_FOUND, getCarro(location).getStatusCode());
+		try {
+			assertNotNull(getCarro(location));
+		}catch (ObjectNotFoundException e) {
+			//OK
+		}
 	}
 	
 	@Test
